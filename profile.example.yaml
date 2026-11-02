@@ -1,0 +1,53 @@
+# Copy this file to profile.yaml and fill it in. profile.yaml stays out of git.
+# Only `ai_context` is sent to the AI. Everything else is typed into forms directly.
+
+contact:
+  first_name: Jane
+  last_name: Doe
+  email: jane@example.com
+  phone: "555-555-0100"
+  address: 123 Main St
+  city: Austin
+  state: TX
+  zip: "78701"
+  country: United States
+
+links:
+  linkedin: https://www.linkedin.com/in/example
+  github: https://github.com/example
+  website: ""
+
+# Answers to sensitive questions come only from here, never from the AI.
+# Leave a value blank to send any required question about it to the manual table.
+work:
+  authorized_to_work_in_us: "Yes"
+  requires_sponsorship: "No"
+  willing_to_relocate: "Yes"
+  salary_expectation: ""
+
+demographics:
+  gender: ""
+  race: ""
+  hispanic_or_latino: ""
+  veteran_status: ""
+  disability_status: ""
+
+# True lets the tool tick "I agree" privacy and data-processing checkboxes.
+consent: true
+
+job_filters:
+  # A job passes if its location contains one of these. Leave empty to keep all.
+  locations: []
+  # True drops jobs the feed marks as not offering sponsorship.
+  needs_sponsorship: false
+
+# `file` is relative to this profile. `use_for` helps the AI choose.
+resumes:
+  - name: software
+    file: resumes/software.pdf
+    use_for: Backend, full-stack and general software roles
+
+# Facts about you for the AI to use with your resume: preferred work,
+# projects worth mentioning, availability. Leave out contact details.
+ai_context: |
+  Graduating in May. Most interested in backend and AI engineering roles.

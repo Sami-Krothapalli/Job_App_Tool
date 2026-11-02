@@ -1,0 +1,23 @@
+[project]
+name = "job-app-tool"
+version = "0.1.0"
+description = "Finds new-grad jobs each morning, applies where it can, and logs everything to Notion."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "anthropic>=2.3.0",
+    "httpx>=0.28.1",
+    "playwright>=1.64.1",
+    "pydantic>=2.14.2",
+    "pypdf>=6.21.4",
+    "pyyaml>=6.0.3",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]

@@ -1,0 +1,10 @@
+# Personal details and secrets. These must never be committed.
+profile.yaml
+.env
+resumes/
+data/
+
+# Python
+.venv/
+__pycache__/
+.pytest_cache/

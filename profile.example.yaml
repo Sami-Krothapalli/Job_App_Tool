@@ -40,6 +40,8 @@ job_filters:
   locations: []
   # True drops jobs the feed marks as not offering sponsorship.
   needs_sponsorship: false
+  # Places where the sponsorship filter does not apply, such as Canada.
+  sponsorship_not_needed_in: []
 
 # `file` is relative to this profile. `use_for` helps the AI choose.
 resumes:

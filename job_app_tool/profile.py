@@ -47,6 +47,7 @@ class Demographics(Section):
 class JobFilters(Section):
     locations: list[str] = []
     needs_sponsorship: bool = False
+    sponsorship_not_needed_in: list[str] = []
 
 
 class Resume(Section):

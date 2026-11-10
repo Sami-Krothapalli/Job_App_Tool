@@ -1,6 +1,7 @@
 """The tool's memory: every job it has seen and what happened to it, in one SQLite file."""
 
 import sqlite3
+from job_app_tool.feed import is_open
 
 
 def connect(path):
@@ -60,14 +61,29 @@ def get_job(conn, job_id):
         return dict(row)
 
 
-def save_new_jobs(conn, jobs):
+def save_new_jobs(conn, job):
     """Save open jobs from the feed that aren't stored yet, with status 'new'.
 
     Receives the whole list of jobs from the feed, not one id. Returns only the
     newly saved jobs. Closed jobs are not stored, so one that reopens later is
     still new.
     """
-    pass
+    new_jobs = []
+    for job in jobs:
+        if not is_open(job):
+            continue
+        if get_job(conn, job["id"]) is not None:
+            continue
+    conn.execute(
+        """
+        INSERT INTO jobs (id, company_name, title, url, date_posted, status)
+        VALUES (?, ?, ?, ?, ?, 'new) 
+    """,
+        (job["id"], job["company_name"], job["title"], job["url"], job["date_posted"]),
+    )
+    new_jobs.append(job)
+    conn.commit()
+    return new_jobs
 
 
 def set_status(conn, job_id, status, reason=None):

@@ -50,3 +50,39 @@ def save_new_jobs(conn, job_id):
 
 def set_status(conn, job_id, status, reason=None):
     pass
+
+
+def seed(conn, job_id):
+    pass
+
+
+def queued_jobs(conn, limit):
+    pass
+
+
+def start_submitting(conn, job_id, now):
+    pass
+
+
+def recover_interrupted(conn):
+    pass
+
+
+def attempts_on(conn):
+    pass
+
+
+def unsynced(conn):
+    pass
+
+
+def mark_synced(conn, job_id):
+    pass
+
+
+def record_finished_run(conn, day):
+    pass
+
+
+def run_finished_on(conn, day):
+    pass

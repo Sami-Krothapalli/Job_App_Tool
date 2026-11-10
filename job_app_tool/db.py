@@ -61,7 +61,7 @@ def get_job(conn, job_id):
         return dict(row)
 
 
-def save_new_jobs(conn, job):
+def save_new_jobs(conn, jobs):
     """Save open jobs from the feed that aren't stored yet, with status 'new'.
 
     Receives the whole list of jobs from the feed, not one id. Returns only the

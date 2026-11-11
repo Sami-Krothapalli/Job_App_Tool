@@ -137,7 +137,18 @@ def queued_jobs(conn, limit):
 
     Only reads: the jobs stay queued.
     """
-    pass
+
+    rows = conn.execute(
+        """
+        SELECT * FROM jobs
+        WHERE status = 'queued'
+        ORDER BY date_posted
+        LIMIT ?
+        """,
+        (limit,),
+    ).fetchall()
+    conn.commit()
+    return [dict(row) for row in rows]
 
 
 def start_submitting(conn, job_id, now):

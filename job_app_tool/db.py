@@ -113,7 +113,23 @@ def seed(conn, jobs):
 
     Jobs already in the database are left unchanged.
     """
-    pass
+    for job in jobs:
+        if not is_open(job):
+            continue
+        conn.execute(
+            """
+        INSERT OR IGNORE INTO jobs (id, company_name, title, url, date_posted, status, reason)
+        VALUES (?, ?, ?, ?, ?, 'skipped', 'seeded before first run')
+        """,
+            (
+                job["id"],
+                job["company_name"],
+                job["title"],
+                job["url"],
+                job["date_posted"],
+            ),
+        )
+        conn.commit()
 
 
 def queued_jobs(conn, limit):

@@ -74,14 +74,20 @@ def save_new_jobs(conn, jobs):
             continue
         if get_job(conn, job["id"]) is not None:
             continue
-    conn.execute(
-        """
-        INSERT INTO jobs (id, company_name, title, url, date_posted, status)
-        VALUES (?, ?, ?, ?, ?, 'new) 
-    """,
-        (job["id"], job["company_name"], job["title"], job["url"], job["date_posted"]),
-    )
-    new_jobs.append(job)
+        conn.execute(
+            """
+            INSERT INTO jobs (id, company_name, title, url, date_posted, status)
+            VALUES (?, ?, ?, ?, ?, 'new')
+            """,
+            (
+                job["id"],
+                job["company_name"],
+                job["title"],
+                job["url"],
+                job["date_posted"],
+            ),
+        )
+        new_jobs.append(job)
     conn.commit()
     return new_jobs
 
@@ -91,7 +97,15 @@ def set_status(conn, job_id, status, reason=None):
 
     Every change marks the job as not yet copied to Notion.
     """
-    pass
+    conn.execute(
+        """
+        UPDATE jobs 
+        SET status = ?, reason = ?, notion_sync = 0
+        WHERE id = ?
+        """,
+        (status, reason, job_id),
+    )
+    conn.commit()
 
 
 def seed(conn, jobs):
